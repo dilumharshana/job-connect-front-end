@@ -1,0 +1,72 @@
+.company-dashboard {
+    padding: 2rem;
+    background-color: #f0f0f0;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .create-job-button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .create-job-button:hover {
+    background-color: #3367d6;
+  }
+  
+  .job-count {
+    margin-bottom: 1.5rem;
+  }
+  
+  .job-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1.5rem;
+  }
+  
+  .job-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .job-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .job-card p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .job-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .edit-job-button,
+  .delete-job-button {
+    background-color: transparent;
+    border: none;
+    color: #4285f4;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .edit-job-button:hover,
+  .delete-job-button:hover {
+    color: #3367d6;
+  }

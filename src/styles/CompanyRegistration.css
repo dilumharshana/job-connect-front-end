@@ -1,0 +1,265 @@
+/* ModernRegistration.css */
+:root {
+  --primary-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  --secondary-gradient: linear-gradient(135deg, #4158D0 0%, #C850C0 50%, #FFCC70 100%);
+  --background-light: #F8F9FD;
+  --text-dark: #2D3436;
+  --text-light: #636E72;
+  --border-color: #E5E9F2;
+  --error-color: #FF4757;
+}
+
+.modern-registration-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* Left Side Styling */
+.registration-left {
+  background: var(--secondary-gradient);
+  padding: 4rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-section {
+  margin-bottom: 4rem;
+}
+
+.brand-section h1 {
+  font-size: 3.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.brand-tagline {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.illustration-wrapper {
+  position: relative;
+  height: 400px;
+}
+
+.floating-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 280px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-card:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.floating-card:nth-child(2) {
+  top: 120px;
+  left: 100px;
+  animation-delay: 1s;
+}
+
+.floating-card:nth-child(3) {
+  top: 240px;
+  left: 50px;
+  animation-delay: 2s;
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* Right Side Styling */
+.registration-right {
+  background: var(--background-light);
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-container h2 {
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.form-subtitle {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+.modern-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.floating-label {
+  position: absolute;
+  left: 1rem;
+  top: -0.5rem;
+  background: var(--background-light);
+  padding: 0 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+.modern-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.modern-input:focus {
+  border-color: #4158D0;
+  box-shadow: 0 0 0 4px rgba(65, 88, 208, 0.1);
+  outline: none;
+}
+
+.modern-input.has-error {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.submit-button {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text-light);
+}
+
+.form-footer a {
+  color: #4158D0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .modern-registration-container {
+    grid-template-columns: 1fr;
+  }
+
+  .registration-left {
+    display: none;
+  }
+
+  .registration-right {
+    padding: 2rem;
+  }
+
+  .form-container {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container h2 {
+    font-size: 2rem;
+  }
+
+  .form-container {
+    padding: 1rem;
+  }
+
+  .modern-input {
+    padding: 0.875rem;
+  }
+}
