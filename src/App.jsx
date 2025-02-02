@@ -8,9 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateJobPost from './components/CreateJobPost';
 import CompanyDashboard from './components/CompanyDashboard';
 import axios from 'axios';
+import CvUploader from './components/CvUploader';
 
 function App() {
   const [file, setFile] = useState(null)
+  const [quiz, setQuiz] = useState([])
 
   const handleSubmitCv = async () => {
     const formData = new FormData();
@@ -23,7 +25,7 @@ function App() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("File uploaded successfully:", JSON.parse(response.data?.data));
+      setQuiz(JSON.parse(response.data?.data))
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -34,21 +36,29 @@ function App() {
   };
   return (
 
-    <>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleSubmitCv}>submit</button>
-    </>
+    // <>
+    //   <input type="file" onChange={handleFileChange} />
+    //   <button onClick={handleSubmitCv}>submit</button>
+
+    //   {
+    //     // eslint-disable-next-line react/jsx-key
+    //     quiz?.map((q, index) => (<div>
+    //       {index}  {q}
+    //     </div>))
+    //   }
+    // </>
 
     // In your App.js or routing configuration
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<HomePage />} />
-    //     <Route path="/company/register" element={<CompanyRegistration />} />
-    //     <Route path="/applicant/register" element={<ApplicantRegistration />} />
-    //     <Route path="/company/create-job" element={<CreateJobPost />} />
-    //     <Route path="/company/dashboard" element={<CompanyDashboard />} />
-    //   </Routes>
-    // </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/company/register" element={<CompanyRegistration />} />
+        <Route path="/applicant/register" element={<ApplicantRegistration />} />
+        <Route path="/company/create-job" element={<CreateJobPost />} />
+        <Route path="/company/dashboard" element={<CompanyDashboard />} />
+        <Route path="/user/upload-cv" element={<CvUploader />} />
+      </Routes>
+    </Router>
   )
 }
 

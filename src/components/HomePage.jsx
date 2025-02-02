@@ -26,7 +26,7 @@ const HomePage = () => {
             AI-Powered Job Matching Platform™
           </h1>
           <p className="hero-description">
-            Connecting talented professionals with leading companies through intelligent matching algorithms. 
+            Connecting talented professionals with leading companies through intelligent matching algorithms.
             Our platform empowers both job seekers and employers to make data-driven decisions in real-time.
           </p>
 
@@ -40,7 +40,7 @@ const HomePage = () => {
                   <li>✓ Advanced analytics dashboard</li>
                   <li>✓ Automated screening process</li>
                 </ul>
-                <button 
+                <button
                   className="register-btn"
                   onClick={() => navigate('/company/register')}
                 >
@@ -58,11 +58,29 @@ const HomePage = () => {
                   <li>✓ Skills assessment tools</li>
                   <li>✓ Career growth tracking</li>
                 </ul>
-                <button 
+                <button
                   className="register-btn"
                   onClick={() => navigate('/applicant/register')}
                 >
                   Register as Applicant
+                </button>
+              </div>
+            </div>
+
+            <div className="card applicant-card">
+              <div className="card-content">
+                <h2>Get an Ai mock interview</h2>
+                <p>Find your dream job with AI-powered job matching</p>
+                <ul className="features-list">
+                  <li>✓ Personalized job recommendations</li>
+                  <li>✓ Skills assessment tools</li>
+                  <li>✓ Career growth tracking</li>
+                </ul>
+                <button
+                  className="register-btn"
+                  onClick={() => navigate('/user/upload-cv')}
+                >
+                  Face free AI interview
                 </button>
               </div>
             </div>
@@ -73,7 +91,7 @@ const HomePage = () => {
           <div className="notification-card">
             <div className="notification-icon">
               <svg viewBox="0 0 24 24" fill="none" className="bell-icon">
-                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" fill="currentColor"/>
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" fill="currentColor" />
               </svg>
             </div>
             <div className="notification-content">
