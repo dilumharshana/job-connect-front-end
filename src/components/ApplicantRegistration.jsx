@@ -2,8 +2,9 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import {registerApplicant} from '../services/ApplicantService'
+import { registerApplicant } from '../services/ApplicantService'
 import '../styles/ApplicantRegistration.css';
+import { RegistrationLayout } from './RegistrationLayout';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -47,13 +48,14 @@ const ApplicantRegistration = () => {
   };
 
   return (
-    <div className="applicant-registration-container">
+    <RegistrationLayout>
+
       <div className="auth-wrapper">
         <div className="auth-header">
           <h1>Create Your Account</h1>
           <p>Join our platform to find your dream job</p>
         </div>
-        
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -143,7 +145,8 @@ const ApplicantRegistration = () => {
           )}
         </Formik>
       </div>
-    </div>
+
+    </RegistrationLayout>
   );
 };
 
