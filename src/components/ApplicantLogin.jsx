@@ -35,39 +35,41 @@ const ApplicantLogin = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-box">
-                <h1 className="login-title">Welcome Back!</h1>
-                <p className="login-subtitle">Login to access your dashboard and continue your journey.</p>
-                <form onSubmit={handleLogin}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
-                            required
-                        />
-                        {error.includes('email') && <span className="error-message">{error}</span>}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
-                            required
-                        />
-                        {error.includes('password') && <span className="error-message">{error}</span>}
-                    </div>
-                    <button type="submit" className="login-button" disabled={loading}>
-                        {loading ? 'Logging in...' : 'Login'}
-                    </button>
-                </form>
+        <div className='login-component'>
+            <div className="login-container">
+                <div className="login-box">
+                    <h1 className="login-title">Welcome Back!</h1>
+                    <p className="login-subtitle">Login to access your dashboard and continue your journey.</p>
+                    <form onSubmit={handleLogin}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                required
+                            />
+                            {error.includes('email') && <span className="error-message">{error}</span>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your password"
+                                required
+                            />
+                            {error.includes('password') && <span className="error-message">{error}</span>}
+                        </div>
+                        <button type="submit" className="login-button" disabled={loading}>
+                            {loading ? 'Logging in...' : 'Login'}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

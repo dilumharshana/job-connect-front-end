@@ -16,7 +16,8 @@ const HomePage = () => {
           <a href="#features">Features</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
-          <button className="nav-btn" onClick={() => navigate('/login')}>Sign In</button>
+          <button className="nav-btn" onClick={() => navigate('/applicant-login')}>Applicant Login</button>
+          <button className="nav-btn" onClick={() => navigate('/company-login')}>Company Login</button>
         </div>
       </nav>
 
