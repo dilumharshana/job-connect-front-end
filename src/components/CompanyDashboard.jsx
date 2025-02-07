@@ -1,73 +1,221 @@
-import React, { useState, useEffect } from 'react';
+import { BarChart2, Bell, Briefcase, Filter, PlusCircle, Search, Users } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/CompanyDashboard.css';
+import "react-circular-progressbar/dist/styles.css";
+import JobCard from './JobCard';
 
-// Sample data
-const sampleJobData = [
-  { id: 1, name: 'Software Engineer', applicants: 25 },
-  { id: 2, name: 'Product Manager', applicants: 18 },
-  { id: 3, name: 'UI/UX Designer', applicants: 32 },
-  { id: 4, name: 'Data Analyst', applicants: 15 },
-];
-
-const CompanyDashboard = () => {
-  const [jobs, setJobs] = useState(sampleJobData);
+const Dashboard = () => {
+  const [jobs, setJobs] = useState({ activeJobs: [], inactiveJobs: [] });
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch job data from an API (not implemented in this example)
-    // setJobs(fetchedJobData);
+    const fetchJobs = async () => {
+      try {
+        // const response = await axios.get('http://localhost:5000/jobs');
+        const response = {
+          "activeJobs": [
+            {
+              "id": "JOB-001",
+              "name": "Senior Software Engineer",
+              "description": "Develop and maintain AI-powered applications using modern tech stacks.",
+              "salary": "$120,000",
+              "expectedCommunicationLevel": "85%",
+              "expectedCriticalThinkingLevel": "90%",
+              "expectedProbSolLevel": "95%",
+              "numberOfApplicants": 42,
+              "postedDate": "2024-03-15",
+              "location": "Remote",
+              "department": "Engineering",
+              "closingDate": "2024-04-30"
+            },
+            {
+              "id": "JOB-001",
+              "name": "AI Engineer",
+              "description": "Develop and maintain AI-powered applications using modern tech stacks.",
+              "salary": "$120,000",
+              "expectedCommunicationLevel": "85%",
+              "expectedCriticalThinkingLevel": "90%",
+              "expectedProbSolLevel": "95%",
+              "numberOfApplicants": 42,
+              "postedDate": "2024-03-15",
+              "location": "Remote",
+              "department": "Engineering",
+              "closingDate": "2024-04-30"
+            },
+            {
+              "id": "JOB-001",
+              "name": "Software Engineer",
+              "description": "Develop and maintain AI-powered applications using modern tech stacks.",
+              "salary": "$120,000",
+              "expectedCommunicationLevel": "85%",
+              "expectedCriticalThinkingLevel": "90%",
+              "expectedProbSolLevel": "95%",
+              "numberOfApplicants": 42,
+              "postedDate": "2024-03-15",
+              "location": "Remote",
+              "department": "Engineering",
+              "closingDate": "2024-04-30"
+            },
+            {
+              "id": "JOB-001",
+              "name": "Devops Engineer",
+              "description": "Develop and maintain AI-powered applications using modern tech stacks.",
+              "salary": "$120,000",
+              "expectedCommunicationLevel": "85%",
+              "expectedCriticalThinkingLevel": "90%",
+              "expectedProbSolLevel": "95%",
+              "numberOfApplicants": 42,
+              "postedDate": "2024-03-15",
+              "location": "Remote",
+              "department": "Engineering",
+              "closingDate": "2024-04-30"
+            },
+            {
+              "id": "JOB-002",
+              "name": "UX Designer",
+              "description": "Design intuitive interfaces for AI-driven job matching platforms.",
+              "salary": "$95,000",
+              "expectedCommunicationLevel": "90%",
+              "expectedCriticalThinkingLevel": "85%",
+              "expectedProbSolLevel": "80%",
+              "numberOfApplicants": 28,
+              "postedDate": "2024-03-20",
+              "location": "New York, NY",
+              "department": "Design",
+              "closingDate": "2024-05-15"
+            }
+          ],
+          "inactiveJobs": [
+            {
+              "id": "JOB-003",
+              "name": "Marketing Manager",
+              "description": "Lead AI product marketing campaigns (position closed).",
+              "salary": "$110,000",
+              "expectedCommunicationLevel": "95%",
+              "expectedCriticalThinkingLevel": "85%",
+              "expectedProbSolLevel": "75%",
+              "numberOfApplicants": 56,
+              "postedDate": "2023-12-01",
+              "location": "San Francisco, CA",
+              "department": "Marketing",
+              "closingDate": "2024-02-28"
+            }
+          ]
+        };
+        setJobs(response);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching jobs:', error);
+        setLoading(false);
+      }
+    };
+    fetchJobs();
   }, []);
 
-  const handleCreateJob = () => {
-    navigate('/company/create-job', { state: { isEditMode: false } });
-  };
-
-  const handleEditJob = (jobId) => {
-    const job = jobs.find((j) => j.id === jobId);
-    navigate('/company/create-job', { state: { isEditMode: true, job } });
-  };
-
-  const handleDeleteJob = (jobId) => {
-    setJobs(jobs.filter((j) => j.id !== jobId));
-    // Call an API to delete the job (not implemented in this example)
+  const filterJobs = (jobs) => {
+    return jobs.filter(job =>
+      job.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   };
 
   return (
-    <div className="company-dashboard">
-      <div className="dashboard-header">
-        <h2>Company Dashboard</h2>
-        <button className="create-job-button" onClick={handleCreateJob}>
-          Create New Job
-        </button>
+    <div className="dashboard-container">
+      <div className="dashboard-sidebar">
+        <h1 className="brand">JobConnect</h1>
+        <nav className="sidebar-nav">
+          <button className="nav-item active">
+            <Briefcase size={20} />
+            Dashboard
+          </button>
+        </nav>
       </div>
-      <div className="job-count">
-        <h3>Total Jobs: {jobs.length}</h3>
-      </div>
-      <div className="job-list">
-        {jobs.map((job) => (
-          <div key={job.id} className="job-card">
-            <h3>{job.name}</h3>
-            <p>Applicants: {job.applicants}</p>
-            <div className="job-actions">
-              <button
-                className="edit-job-button"
-                onClick={() => handleEditJob(job.id)}
-              >
-                Edit
-              </button>
-              <button
-                className="delete-job-button"
-                onClick={() => handleDeleteJob(job.id)}
-              >
-                Delete
-              </button>
+
+      <main className="dashboard-main">
+        <div className="dashboard-header">
+          <div className="search-section">
+            <div className="search-bar">
+              <Search size={20} />
+              <input
+                type="text"
+                placeholder="Search jobs..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <button className="filter-btn">
+              <Filter size={20} />
+              Filters
+            </button>
+          </div>
+          <button className="create-job-btn" onClick={() => navigate('/create-job')}>
+            <PlusCircle size={20} />
+            Create New Job
+          </button>
+        </div>
+
+        <div className="dashboard-stats">
+          <div className="stat-card dark-glass">
+            <BarChart2 size={24} />
+            <div>
+              <p>Total Jobs</p>
+              <h1>{jobs.activeJobs.length + jobs.inactiveJobs.length}</h1>
             </div>
           </div>
-        ))}
-      </div>
+          <div className="stat-card dark-glass">
+            <Bell size={24} />
+            <div>
+              <p>Active Jobs</p>
+              <h1>{jobs.activeJobs.length}</h1>
+            </div>
+          </div>
+          <div className="stat-card dark-glass">
+            <Users size={24} />
+            <div>
+              <p>Applicants</p>
+              <h1>{jobs.activeJobs.length}</h1>
+            </div>
+          </div>
+        </div>
+
+
+        <section className="jobs-section">
+          <h2>Active Jobs</h2>
+          <div className="job-grid">
+            {loading ? (
+              <div className="loading-spinner" />
+            ) : (
+              filterJobs(jobs.activeJobs).map(job => (
+                <JobCard
+                  key={job.id}
+                  job={job}
+                  status="active"
+                  onClick={() => navigate(`/job/${job.id}`)}
+                />
+              ))
+            )}
+          </div>
+        </section>
+
+        <section className="jobs-section">
+          <h2>Inactive Jobs</h2>
+          <div className="job-grid">
+            {!loading && filterJobs(jobs.inactiveJobs).map(job => (
+              <JobCard
+                key={job.id}
+                job={job}
+                status="inactive"
+                onClick={() => navigate(`/job/${job.id}`)}
+              />
+            ))}
+          </div>
+        </section>
+
+      </main>
     </div>
   );
 };
 
-export default CompanyDashboard;
+export default Dashboard;
