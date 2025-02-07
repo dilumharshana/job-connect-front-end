@@ -143,6 +143,37 @@
   transition: all 0.2s ease;
 }
 
+.expectation-levels-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.expected-level-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+}
+
+.expected-level-indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.communication-indicator-color {
+  background-color: #46db18;
+}
+
+.critical-thinking-indicator-color {
+  background-color: #00c0f5;
+}
+
+.job-knowledge-indicator-color {
+  background-color: #f5a700;
+}
+
 .create-job-btn:hover {
   opacity: 0.9;
   transform: translateY(-1px);
@@ -161,6 +192,7 @@
 
 .job-grid {
   display: grid;
+  margin-top: 2%;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
 }

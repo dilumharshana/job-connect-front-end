@@ -161,28 +161,36 @@ const Dashboard = () => {
             <BarChart2 size={24} />
             <div>
               <p>Total Jobs</p>
-              <h1>{jobs.activeJobs.length + jobs.inactiveJobs.length}</h1>
+              <h>{jobs.activeJobs.length + jobs.inactiveJobs.length}</h>
             </div>
           </div>
           <div className="stat-card dark-glass">
             <Bell size={24} />
             <div>
               <p>Active Jobs</p>
-              <h1>{jobs.activeJobs.length}</h1>
+              <h>{jobs.activeJobs.length}</h>
             </div>
           </div>
           <div className="stat-card dark-glass">
             <Users size={24} />
             <div>
               <p>Applicants</p>
-              <h1>{jobs.activeJobs.length}</h1>
+              <h>{jobs.activeJobs.length}</h>
             </div>
           </div>
         </div>
 
 
         <section className="jobs-section">
+
           <h2>Active Jobs</h2>
+
+          <div className='expectation-levels-container'>
+            <div className='expected-level-container'><div className='expected-level-indicator communication-indicator-color'></div>Communication skill level</div>
+            <div className='expected-level-container'><div className='expected-level-indicator critical-thinking-indicator-color'></div> Critical thinking level</div>
+            <div className='expected-level-container'><div className='expected-level-indicator job-knowledge-indicator-color'></div>Job related knowledge level</div>
+          </div>
+
           <div className="job-grid">
             {loading ? (
               <div className="loading-spinner" />
