@@ -1,9 +1,8 @@
-import { BarChart2, Bell, Briefcase, Filter, PlusCircle, Search, Users } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/CompanyDashboard.css';
 import "react-circular-progressbar/dist/styles.css";
-import JobCard from './JobCard';
+import { Outlet, useNavigate } from 'react-router-dom';
+import '../styles/CompanyDashboard.css';
 
 const Dashboard = () => {
   const [jobs, setJobs] = useState({ activeJobs: [], inactiveJobs: [] });
@@ -126,102 +125,18 @@ const Dashboard = () => {
       <div className="dashboard-sidebar">
         <h1 className="brand">JobConnect</h1>
         <nav className="sidebar-nav">
-          <button className="nav-item active">
+          <button className="nav-item active" onClick={() => navigate('/company/dashboard')}>
             <Briefcase size={20} />
             Dashboard
+          </button>
+          <button className="nav-item active" onClick={() => navigate('/company/jobs')}>
+            <Briefcase size={20} />
+            Applicants
           </button>
         </nav>
       </div>
 
-      <main className="dashboard-main">
-        <div className="dashboard-header">
-          <div className="search-section">
-            <div className="search-bar">
-              <Search size={20} />
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <button className="filter-btn">
-              <Filter size={20} />
-              Filters
-            </button>
-          </div>
-          <button className="create-job-btn" onClick={() => navigate('/create-job')}>
-            <PlusCircle size={20} />
-            Create New Job
-          </button>
-        </div>
-
-        <div className="dashboard-stats">
-          <div className="stat-card dark-glass">
-            <BarChart2 size={24} />
-            <div>
-              <p>Total Jobs</p>
-              <h>{jobs.activeJobs.length + jobs.inactiveJobs.length}</h>
-            </div>
-          </div>
-          <div className="stat-card dark-glass">
-            <Bell size={24} />
-            <div>
-              <p>Active Jobs</p>
-              <h>{jobs.activeJobs.length}</h>
-            </div>
-          </div>
-          <div className="stat-card dark-glass">
-            <Users size={24} />
-            <div>
-              <p>Applicants</p>
-              <h>{jobs.activeJobs.length}</h>
-            </div>
-          </div>
-        </div>
-
-
-        <section className="jobs-section">
-
-          <h2>Active Jobs</h2>
-
-          <div className='expectation-levels-container'>
-            <div className='expected-level-container'><div className='expected-level-indicator communication-indicator-color'></div>Communication skill level</div>
-            <div className='expected-level-container'><div className='expected-level-indicator critical-thinking-indicator-color'></div> Critical thinking level</div>
-            <div className='expected-level-container'><div className='expected-level-indicator job-knowledge-indicator-color'></div>Job related knowledge level</div>
-          </div>
-
-          <div className="job-grid">
-            {loading ? (
-              <div className="loading-spinner" />
-            ) : (
-              filterJobs(jobs.activeJobs).map(job => (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  status="active"
-                  onClick={() => navigate(`/job/${job.id}`)}
-                />
-              ))
-            )}
-          </div>
-        </section>
-
-        <section className="jobs-section">
-          <h2>Inactive Jobs</h2>
-          <div className="job-grid">
-            {!loading && filterJobs(jobs.inactiveJobs).map(job => (
-              <JobCard
-                key={job.id}
-                job={job}
-                status="inactive"
-                onClick={() => navigate(`/job/${job.id}`)}
-              />
-            ))}
-          </div>
-        </section>
-
-      </main>
+      <Outlet />
     </div>
   );
 };

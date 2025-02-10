@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/applicantLogin.css';
+import { baseUrl } from '../constants';
+import { userLogin } from '../services/LoginService';
 
 const ApplicantLogin = () => {
     const [email, setEmail] = useState('');
@@ -16,14 +18,15 @@ const ApplicantLogin = () => {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/applicant/login', {
+            const response = await userLogin({
                 email,
                 password,
             });
+            console.log(response);
 
-            if (response.data.loginSuccessful) {
-                localStorage.setItem('job-connect-applicant', response.data.token);
-                navigate('/applicant-dashboard');
+            if (response?.data?.userType) {
+                localStorage.setItem('job-connect-applicant', response?.data?.userType);
+                navigate(response?.data?.userType === "APPLICANT" ? '/applicant/dashboard' : '/company/dashboard');
             } else {
                 setError(response.data.message || 'Invalid credentials');
             }

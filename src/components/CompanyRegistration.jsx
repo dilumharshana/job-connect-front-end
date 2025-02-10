@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createCompanyProfile } from '../services/CompanyService';
 import '../styles/CompanyRegistration.css'
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
   companyName: Yup.string()
@@ -25,6 +26,9 @@ const validationSchema = Yup.object().shape({
 });
 
 const CompanyRegistration = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="modern-registration-container">
       <div className="registration-left">
@@ -64,8 +68,12 @@ const CompanyRegistration = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, { setSubmitting }) => {
+
               try {
-                await createCompanyProfile(values);
+                const response = await createCompanyProfile(values);
+                if (response?.data) {
+                  navigate('/applicant-login')
+                }
                 alert('Registration successful!');
               } catch (error) {
                 alert('Registration failed. Please try again.');
