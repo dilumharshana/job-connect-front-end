@@ -9,7 +9,7 @@ const JobCard = ({ job, status, onClick }) => {
             <div className="job-card-header">
                 <Briefcase className="job-icon" />
                 <div>
-                    <h3>{job.name}</h3>
+                    <h3>{job.job_name}</h3>
                     <p className="job-salary">{job.salary}</p>
                 </div>
             </div>
@@ -21,8 +21,8 @@ const JobCard = ({ job, status, onClick }) => {
                     <div className="skill-loader">
                         {/* <span>Communication</span> */}
                         <CircularProgressbar
-                            value={parseInt(job.expectedCommunicationLevel)}
-                            text={`${job.expectedCommunicationLevel}`}
+                            value={parseInt(job.communication_level)}
+                            text={`${job.communication_level}`}
                             styles={buildStyles({
                                 textColor: '#46db18',
                                 pathColor: '#46db18',
@@ -35,8 +35,8 @@ const JobCard = ({ job, status, onClick }) => {
                     <div className="skill-loader">
                         {/* <span>Critical Thinking</span> */}
                         <CircularProgressbar
-                            value={parseInt(job.expectedCriticalThinkingLevel)}
-                            text={`${job.expectedCriticalThinkingLevel}`}
+                            value={parseInt(job.critical_think_level)}
+                            text={`${job.critical_think_level}`}
                             styles={buildStyles({
                                 textColor: '#00c0f5',
                                 pathColor: '#00c0f5',
@@ -49,8 +49,8 @@ const JobCard = ({ job, status, onClick }) => {
                     <div className="skill-loader">
                         {/* <span>Problem Solving</span> */}
                         <CircularProgressbar
-                            value={parseInt(job.expectedProbSolLevel)}
-                            text={`${job.expectedProbSolLevel}`}
+                            value={parseInt(job.job_knowledge_level)}
+                            text={`${job.job_knowledge_level}`}
                             styles={buildStyles({
                                 textColor: '#f5a700',
                                 pathColor: '#f5a700',

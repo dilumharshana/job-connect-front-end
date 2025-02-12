@@ -1,159 +1,289 @@
-import React, { useState, useEffect } from 'react'; 
-import { Formik, Form, Field, FieldArray } from 'formik'; 
-import * as Yup from 'yup'; 
-import '../styles/CreateJobPost.css'; 
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import '../styles/CreateJobPost.css';
+import { useNavigate } from 'react-router-dom';
 
-const  initialValues = { 
-    jobName:'',
-    companyName:'',
-    yearsOfExperience:"",
-    jobLocation:'',
-    salary:'',
-    skills:'',
-    qualifications: [''],
-  };
+const CreateJobPost = ({ jobData = null, onSuccess }) => {
+  const isEditMode = !!jobData;
+  const navigate = useNavigate()
 
-const CreateJobPost = ({isEditMode = false,  }) => {
-  
-  const validationSchema = Yup.object({
-    jobName: Yup.string().required('Job name is required'),
-    companyName: Yup.string().required('Company name is required'),
-    yearsOfExperience: Yup.number()
-      .integer('Years of experience must be an integer')
-      .positive('Years of experience must be a positive number')
-      .required('Years of experience is required'),
-    jobLocation: Yup.string().required('Job location is required'),
-    salary: Yup.number()
-      .positive('Salary must be a positive number')
-      .required('Salary is required'),
-    skills: Yup.string().required('Skills are required'),
-    qualifications: Yup.array()
-      .of(Yup.string().required('Qualification is required'))
-      .min(1, 'At least one qualification is required'),
+  const [formData, setFormData] = useState({
+    job_name: '',
+    category: '',
+    description: '',
+    communication_level: 50,
+    critical_think_level: 50,
+    job_knowledge_level: 50,
+    work_mode: '',
+    salary: '',
+    experience: ''
   });
 
-  // Handle form submission (Create or Edit)
-  const handleFormSubmit = async (values) => {
-    try {
-      // Pass data to the parent component or API call
-    } catch (error) {
-      console.error("Error:", error);
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (jobData) {
+      setFormData(jobData);
     }
+  }, [jobData]);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleRangeChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: parseInt(e.target.value) });
+  };
+
+  const validateForm = () => {
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value && key !== 'jobId') {
+        setError(`Please fill in the ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      const endpoint = isEditMode
+        ? `http://localhost:5000/api/company/job`
+        : 'http://localhost:5000/api/company/job';
+
+      let response = null;
+
+      const payload = {
+        ...formData,
+        companyId: JSON.parse(localStorage.getItem("job-connect")).userId
+      }
+
+      if (isEditMode) {
+        response = await axios.put(endpoint, payload);
+      } else {
+        response = await axios.post(endpoint, payload);
+      }
+
+
+      if (response.data) {
+        setShowModal(true);
+        if (!isEditMode) {
+          setFormData({
+            job_name: '',
+            category: '',
+            description: '',
+            communication_level: 50,
+            critical_think_level: 50,
+            job_knowledge_level: 50,
+            work_mode: '',
+            salary: '',
+            experience: '',
+          });
+
+          navigate('/company/jobs')
+        }
+        if (onSuccess) {
+          onSuccess();
+        }
+      }
+    } catch (err) {
+      setError(isEditMode ? 'Failed to update job. Please try again.' : 'Failed to create job. Please try again.');
+    }
+    setLoading(false);
   };
 
   return (
-    <div className="create-job-post">
-      <h1>{isEditMode ? 'Update Job' : 'Create a New Job'}</h1>
+    <div className="create-job-container">
+      <div className="form-card">
+        <h1 className="form-title">
+          {isEditMode ? 'Edit Job Posting' : 'Create New Job Posting'}
+        </h1>
 
-      <Formik
-        initialValues={{
-          jobName: initialValues.jobName || '',
-          companyName: initialValues.companyName || '',
-          yearsOfExperience: initialValues.yearsOfExperience || '',
-          jobLocation: initialValues.jobLocation || '',
-          salary: initialValues.salary || '',
-          skills: initialValues.skills || '',
-          qualifications: initialValues.qualifications || [''],  // Default to an empty array with one qualification
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleFormSubmit}
-      >
-        {({ errors, touched }) => (
-          <Form>
+        <form onSubmit={handleSubmit}>
+          <div className="row mb-4">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label>Job Category</label>
+                <select
+                  className="form-control"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select category</option>
+                  <option value="software-engineer">Software Engineer</option>
+                  <option value="ai-engineer">AI Engineer</option>
+                  <option value="devops-engineer">DevOps Engineer</option>
+                  <option value="ux-designer">UX Designer</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="form-group">
+                <label>Job Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="job_name"
+                  value={formData.job_name}
+                  onChange={handleInputChange}
+                  placeholder="Enter job title"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group mb-4">
+            <label>Description</label>
+            <textarea
+              className="form-control"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              placeholder="Enter job description"
+              rows={4}
+            />
+          </div>
+
+          <div className="skill-levels mb-4">
             <div className="form-group">
-              <label htmlFor="jobName">Job Name</label>
-              <Field name="jobName" type="text" />
-              {errors.jobName && touched.jobName && (
-                <div className="error">{errors.jobName}</div>
-              )}
+              <label>
+                Expected Communication Level: {formData.communication_level}%
+              </label>
+              <input
+                type="range"
+                className="form-range custom-range"
+                name="communication_level"
+                min="0"
+                max="100"
+                value={formData.communication_level}
+                onChange={handleRangeChange}
+              />
             </div>
 
             <div className="form-group">
-              <label htmlFor="companyName">Company Name</label>
-              <Field name="companyName" type="text" />
-              {errors.companyName && touched.companyName && (
-                <div className="error">{errors.companyName}</div>
-              )}
+              <label>
+                Expected Critical Thinking Level: {formData.critical_think_level}%
+              </label>
+              <input
+                type="range"
+                className="form-range custom-range"
+                name="critical_think_level"
+                min="0"
+                max="100"
+                value={formData.critical_think_level}
+                onChange={handleRangeChange}
+              />
             </div>
 
             <div className="form-group">
-              <label htmlFor="yearsOfExperience">Years of Experience</label>
-              <Field name="yearsOfExperience" type="number" />
-              {errors.yearsOfExperience && touched.yearsOfExperience && (
-                <div className="error">{errors.yearsOfExperience}</div>
-              )}
+              <label>
+                Expected Job Knowledge Level: {formData.job_knowledge_level}%
+              </label>
+              <input
+                type="range"
+                className="form-range custom-range"
+                name="job_knowledge_level"
+                min="0"
+                max="100"
+                value={formData.job_knowledge_level}
+                onChange={handleRangeChange}
+              />
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <div className="col-md-4">
+              <div className="form-group">
+                <label>Work Mode</label>
+                <select
+                  className="form-control"
+                  name="work_mode"
+                  value={formData.work_mode}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select work mode</option>
+                  <option value="remote">Remote</option>
+                  <option value="hybrid">Hybrid</option>
+                  <option value="onsite">Onsite</option>
+                </select>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="jobLocation">Job Location</label>
-              <Field name="jobLocation" type="text" />
-              {errors.jobLocation && touched.jobLocation && (
-                <div className="error">{errors.jobLocation}</div>
-              )}
+            <div className="col-md-4">
+              <div className="form-group">
+                <label>Salary (USD)</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="salary"
+                  value={formData.salary}
+                  onChange={handleInputChange}
+                  placeholder="Enter salary range"
+                />
+              </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="salary">Salary</label>
-              <Field name="salary" type="number" />
-              {errors.salary && touched.salary && (
-                <div className="error">{errors.salary}</div>
-              )}
+            <div className="col-md-4">
+              <div className="form-group">
+                <label>Experience (Years)</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleInputChange}
+                  placeholder="Required experience"
+                />
+              </div>
             </div>
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="skills">Skills</label>
-              <Field name="skills" type="text" />
-              {errors.skills && touched.skills && (
-                <div className="error">{errors.skills}</div>
-              )}
+          {error && (
+            <div className="alert alert-danger" role="alert">
+              {error}
             </div>
+          )}
 
-            <div className="form-group">
-              <label htmlFor="qualifications">Qualifications</label>
-              <FieldArray name="qualifications">
-                {({ insert, remove, push }) => (
-                  <div>
-                    {values.qualifications && values.qualifications.length > 0 ? (
-                      values.qualifications.map((qualification, index) => (
-                        <div key={index} className="qualification-item">
-                          <Field
-                            name={`qualifications[${index}]`}
-                            type="text"
-                            placeholder="Enter qualification"
-                          />
-                          {index > 0 && (
-                            <button
-                              type="button"
-                              className="remove-button"
-                              onClick={() => remove(index)}
-                            >
-                              Remove
-                            </button>
-                          )}
-                        </div>
-                      ))
-                    ) : null}
-                    <button
-                      type="button"
-                      className="add-qualification-button"
-                      onClick={() => push('')}
-                    >
-                      Add New Qualification
-                    </button>
-                    {errors.qualifications && touched.qualifications && (
-                      <div className="error">{errors.qualifications}</div>
-                    )}
-                  </div>
-                )}
-              </FieldArray>
-            </div>
+          <button
+            type="submit"
+            className="btn btn-primary submit-button"
+            disabled={loading}
+          >
+            {loading ? (
+              <span>
+                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {isEditMode ? 'Updating Job...' : 'Creating Job...'}
+              </span>
+            ) : (
+              isEditMode ? 'Update Job' : 'Create Job'
+            )}
+          </button>
+        </form>
+      </div>
 
-            <button type="submit" className="create-button">
-              {isEditMode ? 'Update Job' : 'Create Job'}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2 className="success-title">Success!</h2>
+            <p>Job has been {isEditMode ? 'updated' : 'created'} successfully!</p>
+            <button
+              className="btn btn-success"
+              onClick={() => setShowModal(false)}
+            >
+              Close
             </button>
-          </Form>
-        )}
-      </Formik>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -131,7 +131,7 @@ const Dashboard = () => {
           </button>
           <button className="nav-item active" onClick={() => navigate('/company/jobs')}>
             <Briefcase size={20} />
-            Applicants
+            Jobs
           </button>
         </nav>
       </div>
