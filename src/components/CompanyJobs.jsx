@@ -16,7 +16,6 @@ export const CompanyJobs = () => {
         const fetchJobs = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/company/${companyId}/jobs`);
-
                 setJobs(response?.data?.data);
                 setLoading(false);
             } catch (error) {

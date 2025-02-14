@@ -7,7 +7,7 @@ import CompanyRegistration from './components/CompanyRegistration';
 import CvUploader from './components/CvUploader';
 import HomePage from './components/HomePage';
 import ApplicantLogin from './components/ApplicantLogin';
-import { CompanyAnalytics } from './components/CompanyAnalyrics';
+import { CompanyAnalytics } from './components/CompanyAnalytics';
 import { CompanyJobs } from './components/CompanyJobs';
 import CreateJobPost from './components/CreateJobPost'
 

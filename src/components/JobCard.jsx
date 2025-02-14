@@ -14,7 +14,7 @@ const JobCard = ({ job, status, onClick }) => {
                 </div>
             </div>
 
-            <div className="job-card-body">
+            <div>
                 <p className="job-description">{job.description}</p>
 
                 <div className="skill-loaders">
@@ -67,7 +67,7 @@ const JobCard = ({ job, status, onClick }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 export default JobCard;

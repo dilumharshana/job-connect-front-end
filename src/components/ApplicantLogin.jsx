@@ -25,7 +25,7 @@ const ApplicantLogin = () => {
             console.log(response);
 
             if (response?.data?.userType) {
-                localStorage.setItem('job-connect', JSON.stringify({ userType: response?.data?.userType, userId: response?.data?.userId }));
+                localStorage.setItem('job-connect', JSON.stringify({ userType: response?.data?.userType, userId: response?.data?.userId, userName: response?.data?.userName }));
                 navigate(response?.data?.userType === "APPLICANT" ? '/applicant/dashboard' : '/company/dashboard');
             } else {
                 setError(response.data.message || 'Invalid credentials');
