@@ -3,14 +3,14 @@ import { Briefcase, Users, TrendingUp } from 'lucide-react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
 
-const JobCard = ({ job, status, onClick }) => {
+const JobCard = ({ job, status, onClick, isApplicant }) => {
     return (
         <div className={`job-card ${status}-job`} onClick={onClick}>
             <div className="job-card-header">
                 <Briefcase className="job-icon" />
                 <div>
                     <h3>{job.job_name}</h3>
-                    <p className="job-salary">{job.salary}</p>
+                    <p className="job-salary">$ {job.salary} per hour</p>
                 </div>
             </div>
 
@@ -61,10 +61,14 @@ const JobCard = ({ job, status, onClick }) => {
                     </div>
                 </div>
                 <div className="job-stats">
-                    <div className="stat-item">
+                    {!isApplicant && <div className="stat-item">
                         <Users />
                         <span>{job.numberOfApplicants} Applicants</span>
-                    </div>
+                    </div>}
+
+                    {
+                        isApplicant && <div className="stat-item">Apply</div>
+                    }
                 </div>
             </div>
         </div >

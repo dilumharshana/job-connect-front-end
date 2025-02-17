@@ -4,10 +4,7 @@ export const RegistrationLayout = ({ children }) => {
     return <div className="modern-registration-container">
         <div className="registration-left">
             <div className="content-wrapper">
-                <div className="brand-section">
-                    <h1>JobConnect</h1>
-                    <p className="brand-tagline">Where Great Companies Find Great Talent</p>
-                </div>
+
                 <div className="illustration-wrapper">
                     <div className="floating-card">
                         <div className="card-icon">🚀</div>
@@ -21,6 +18,11 @@ export const RegistrationLayout = ({ children }) => {
                         <div className="card-icon">🎯</div>
                         <div className="card-text">Smart analytics dashboard</div>
                     </div>
+                </div>
+
+                <div className="brand-section">
+                    <h1>JobConnect</h1>
+                    <p className="brand-tagline">Where Great Companies Find Great Talent</p>
                 </div>
             </div>
         </div>

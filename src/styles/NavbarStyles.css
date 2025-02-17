@@ -3,6 +3,8 @@
   top: 0;
   left: 0;
   right: 0;
+  padding-left: 20px;
+  padding-right: 20px;
   z-index: 1000;
   /* backdrop-filter: blur(10px); */
   background: linear-gradient(90deg, #2b2463, #393044) !important;

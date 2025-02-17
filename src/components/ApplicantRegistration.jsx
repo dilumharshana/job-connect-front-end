@@ -5,9 +5,10 @@ import * as Yup from 'yup';
 import { registerApplicant } from '../services/ApplicantService'
 import '../styles/ApplicantRegistration.css';
 import { RegistrationLayout } from './RegistrationLayout';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
-  fullName: Yup.string()
+  name: Yup.string()
     .matches(/^[a-zA-Z\s]*$/, 'Name can only contain letters and spaces')
     .min(3, 'Name must be at least 3 characters')
     .required('Full name is required'),
@@ -27,8 +28,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const ApplicantRegistration = () => {
+
+  const navigate = useNavigate()
   const initialValues = {
-    fullName: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -37,9 +40,12 @@ const ApplicantRegistration = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const { confirmPassword, ...applicantData } = values;
-      await registerApplicant(applicantData);
+      const response = await registerApplicant(applicantData);
+      if (response?.data) {
+        navigate('/user-login')
+      }
       resetForm();
-      alert('Registration successful! Please check your email to verify your account.');
+      // alert('Registration successful! Please check your email to verify your account.');
     } catch (error) {
       alert('Error during registration. Please try again.');
     } finally {
@@ -63,22 +69,22 @@ const ApplicantRegistration = () => {
         >
           {({ isSubmitting, touched, errors }) => (
             <Form className="auth-form">
-              <div className="form-group">
-                <label htmlFor="fullName">Full Name</label>
+              <div className="form-group-applicant-registration">
+                <label htmlFor="name">Full Name</label>
                 <Field
                   type="text"
-                  name="fullName"
-                  className={`form-control ${touched.fullName && errors.fullName ? 'is-invalid' : ''}`}
+                  name="name"
+                  className={`form-control  ${touched.email && errors.email ? 'is-invalid' : ''}`}
                   placeholder="Enter your full name"
                 />
                 <ErrorMessage
-                  name="fullName"
+                  name="name"
                   component="div"
                   className="error-message"
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group-applicant-registration">
                 <label htmlFor="email">Email Address</label>
                 <Field
                   type="email"
@@ -93,7 +99,7 @@ const ApplicantRegistration = () => {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group-applicant-registration">
                 <label htmlFor="password">Password</label>
                 <Field
                   type="password"
@@ -108,12 +114,12 @@ const ApplicantRegistration = () => {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group-applicant-registration">
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <Field
                   type="password"
                   name="confirmPassword"
-                  className={`form-control ${touched.confirmPassword && errors.confirmPassword ? 'is-invalid' : ''}`}
+                  className={`form-control  ${touched.confirmPassword && errors.confirmPassword ? 'is-invalid' : ''}`}
                   placeholder="Confirm your password"
                 />
                 <ErrorMessage

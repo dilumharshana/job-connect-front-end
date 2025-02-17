@@ -8,9 +8,9 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      <nav className="navbar">
+      <nav className="navbar-homePage">
         <div className="logo">
-          <span className="logo-text">JobConnect</span>
+          <span className="logo-text-home">JobConnect</span>
         </div>
         <div className="nav-links">
           <a href="#features">Features</a>

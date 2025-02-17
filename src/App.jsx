@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import './App.css';
 import ApplicantRegistration from './components/ApplicantRegistration';
 import CompanyDashboard from './components/CompanyDashboard';
+import ApplicantDashboard from './components/ApplicantDashboard';
 import CompanyRegistration from './components/CompanyRegistration';
 import CvUploader from './components/CvUploader';
 import HomePage from './components/HomePage';
@@ -10,6 +10,7 @@ import ApplicantLogin from './components/ApplicantLogin';
 import { CompanyAnalytics } from './components/CompanyAnalytics';
 import { CompanyJobs } from './components/CompanyJobs';
 import CreateJobPost from './components/CreateJobPost'
+import { JobMarket } from './components/JobMarket';
 
 function App() {
 
@@ -23,6 +24,10 @@ function App() {
         <Route path="/create-job" element={<CreateJobPost />} />
         <Route path="company" element={<CompanyDashboard />}>
           <Route path='dashboard' element={<CompanyAnalytics />} />
+          <Route path='jobs' element={<CompanyJobs />} />
+        </Route>
+        <Route path="applicant" element={<ApplicantDashboard />}>
+          <Route path='job-market' element={<JobMarket />} />
           <Route path='jobs' element={<CompanyJobs />} />
         </Route>
         <Route path="/user/upload-cv" element={<CvUploader />} />

@@ -1,12 +1,17 @@
 /* ModernRegistration.css */
 :root {
-  --primary-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-  --secondary-gradient: linear-gradient(135deg, #4158D0 0%, #C850C0 50%, #FFCC70 100%);
-  --background-light: #F8F9FD;
-  --text-dark: #2D3436;
-  --text-light: #636E72;
-  --border-color: #E5E9F2;
-  --error-color: #FF4757;
+  --primary-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  --secondary-gradient: linear-gradient(
+    135deg,
+    #4158d0 0%,
+    #c850c0 50%,
+    #ffcc70 100%
+  );
+  --background-light: #f8f9fd;
+  --text-dark: #2d3436;
+  --text-light: #636e72;
+  --border-color: #e5e9f2;
+  --error-color: #ff4757;
 }
 
 .modern-registration-container {
@@ -23,7 +28,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .content-wrapper {
@@ -112,7 +116,7 @@
 }
 
 .form-subtitle {
-  color: var(--text-light);
+  color: #8d4cb3;
   font-size: 1.1rem;
   margin-bottom: 3rem;
 }
@@ -149,7 +153,7 @@
 }
 
 .modern-input:focus {
-  border-color: #4158D0;
+  border-color: #4158d0;
   box-shadow: 0 0 0 4px rgba(65, 88, 208, 0.1);
   outline: none;
 }
@@ -193,7 +197,7 @@
 }
 
 .form-footer a {
-  color: #4158D0;
+  color: #4158d0;
   text-decoration: none;
   font-weight: 500;
 }
@@ -246,7 +250,7 @@
   }
 
   .form-container {
-    padding: 2rem;
+    padding: 1rem;
   }
 }
 

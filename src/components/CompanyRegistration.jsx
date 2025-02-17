@@ -90,7 +90,6 @@ const CompanyRegistration = () => {
                     type="text"
                     name="companyName"
                     className={`modern-input ${touched.companyName && errors.companyName ? 'has-error' : ''}`}
-                    placeholder="Enter company name"
                   />
                   <ErrorMessage name="companyName" component="div" className="error-message" />
                 </div>
@@ -101,7 +100,6 @@ const CompanyRegistration = () => {
                     type="email"
                     name="email"
                     className={`modern-input ${touched.email && errors.email ? 'has-error' : ''}`}
-                    placeholder="Enter email address"
                   />
                   <ErrorMessage name="email" component="div" className="error-message" />
                 </div>
@@ -112,7 +110,6 @@ const CompanyRegistration = () => {
                     type="password"
                     name="password"
                     className={`modern-input ${touched.password && errors.password ? 'has-error' : ''}`}
-                    placeholder="Create password"
                   />
                   <ErrorMessage name="password" component="div" className="error-message" />
                 </div>
@@ -123,7 +120,6 @@ const CompanyRegistration = () => {
                     type="password"
                     name="confirmPassword"
                     className={`modern-input ${touched.confirmPassword && errors.confirmPassword ? 'has-error' : ''}`}
-                    placeholder="Confirm password"
                   />
                   <ErrorMessage name="confirmPassword" component="div" className="error-message" />
                 </div>
