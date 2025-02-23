@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/applicantLogin.css';
-import { baseUrl } from '../constants';
 import { userLogin } from '../services/LoginService';
+import '../styles/applicantLogin.css';
 
 const ApplicantLogin = () => {
     const [email, setEmail] = useState('');
@@ -26,7 +24,7 @@ const ApplicantLogin = () => {
 
             if (response?.data?.userType) {
                 localStorage.setItem('job-connect', JSON.stringify({ userType: response?.data?.userType, userId: response?.data?.userId, userName: response?.data?.userName }));
-                navigate(response?.data?.userType === "APPLICANT" ? '/applicant/dashboard' : '/company/dashboard');
+                navigate(response?.data?.userType === "APPLICANT" ? '/applicant/job-market' : '/company/dashboard');
             } else {
                 setError(response.data.message || 'Invalid credentials');
             }

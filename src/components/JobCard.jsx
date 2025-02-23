@@ -10,13 +10,12 @@ const JobCard = ({ job, status, onClick, isApplicant }) => {
                 <Briefcase className="job-icon" />
                 <div>
                     <h3>{job.job_name}</h3>
-                    <p className="job-salary">$ {job.salary} per hour</p>
+                    <p className="job-salary"><span className='job-card-company-name'>{job.companyName}</span> | $ {job.salary} per hour</p>
                 </div>
             </div>
 
-            <div>
-                <p className="job-description">{job.description}</p>
-
+            <p className="job-description">Description : {job.description?.substring(0, 50)}...</p>
+            <div className='mt-3'>
                 <div className="skill-loaders">
                     <div className="skill-loader">
                         {/* <span>Communication</span> */}
@@ -63,11 +62,11 @@ const JobCard = ({ job, status, onClick, isApplicant }) => {
                 <div className="job-stats">
                     {!isApplicant && <div className="stat-item">
                         <Users />
-                        <span>{job.numberOfApplicants} Applicants</span>
+                        <span>Applicants -{job.applicant_count}</span>
                     </div>}
 
                     {
-                        isApplicant && <div className="stat-item">Apply</div>
+                        isApplicant && <div className="stat-item">Face interview</div>
                     }
                 </div>
             </div>

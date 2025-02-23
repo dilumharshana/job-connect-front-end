@@ -11,6 +11,7 @@ import { CompanyAnalytics } from './components/CompanyAnalytics';
 import { CompanyJobs } from './components/CompanyJobs';
 import CreateJobPost from './components/CreateJobPost'
 import { JobMarket } from './components/JobMarket';
+import ViewJob from './components/ViewJob';
 
 function App() {
 
@@ -29,8 +30,9 @@ function App() {
         <Route path="applicant" element={<ApplicantDashboard />}>
           <Route path='job-market' element={<JobMarket />} />
           <Route path='jobs' element={<CompanyJobs />} />
+          <Route path='apply' element={<ViewJob />} />
         </Route>
-        <Route path="/user/upload-cv" element={<CvUploader />} />
+        <Route path="upload-cv" element={<CvUploader />} />
       </Routes>
     </Router>
   )

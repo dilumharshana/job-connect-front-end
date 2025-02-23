@@ -11,19 +11,19 @@ const ApplicantDashboard = () => {
       <Navbar />
       <div className="dashboard-sidebar mt-5">
         <nav className="sidebar-nav">
-          <NavLink className="nav-item" to={'/company/dashboard'}>
+          <NavLink className="nav-item" to={'/applicant/job-market'}>
             <Store size={20} />
             Job Market
           </NavLink>
-          <NavLink className="nav-item" to={'/company/jobs'}>
+          <NavLink className="nav-item" to={'/applicant/jobs'}>
             <FileUser size={20} />
             Applied Jobs
           </NavLink>
-          <NavLink className="nav-item" to={'/company/applicants'}>
+          <NavLink className="nav-item" to={'/applicant/applicants'}>
             <Heart size={20} />
             Most suit
           </NavLink>
-          <NavLink className="nav-item" to={'/company/settings'}>
+          <NavLink className="nav-item" to={'/applicant/settings'}>
             <Settings size={20} />
             Settings
           </NavLink>

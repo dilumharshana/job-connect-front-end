@@ -53,8 +53,10 @@ export const JobMarket = () => {
             <select name="" id="" onChange={(e) => setCategory(e.target.value)}>
                 <option value="all" defaultValue="Category">Select job category</option>
                 <option value="software-engineer" defaultValue="software-engineer">Software Engineer</option>
+                <option value="ai-engineer">AI Engineer</option>
                 <option value="human-resource" defaultValue="Category">Human Resources</option>
                 <option value="devops-engineer" defaultValue="Category">Devops Engineer</option>
+                <option value="ux-designer" defaultValue="Category">UI/UX Engineer</option>
                 <option value="accountant" defaultValue="Category">Accountant</option>
             </select>
             <button className="interview-job-btn" onClick={() => navigate('/create-job')}>
@@ -82,7 +84,7 @@ export const JobMarket = () => {
                             key={job?.id}
                             job={job}
                             status="active"
-                            onClick={() => navigate(`/job/${job?.id}`)}
+                            onClick={() => navigate(`/applicant/apply`, { state: { jobData: job } })}
                             isApplicant={true}
                         />
                     ))
