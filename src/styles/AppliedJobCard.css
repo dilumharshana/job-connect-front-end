@@ -1,0 +1,115 @@
+/* Applied Job Card Styles */
+.applied-job-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+.applied-job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: #e6e6e6;
+}
+
+.applied-job-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.applied-job-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+  padding-right: 10px;
+}
+
+.status-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background-color: #ffeccf;
+  color: #e69500;
+}
+
+.status-interviewed {
+  background-color: #dff5ff;
+  color: #0078c8;
+}
+
+.status-rejected {
+  background-color: #ffe5e5;
+  color: #dd2c2c;
+}
+
+.status-offered {
+  background-color: #e5f7ed;
+  color: #0d9649;
+}
+
+.status-accepted {
+  background-color: #e2faeb;
+  color: #0a7c3e;
+}
+
+.card-body {
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #666666;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-row svg {
+  margin-right: 12px;
+  color: #888888;
+}
+
+.info-text {
+  font-size: 14px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 12px;
+  border-top: 1px solid #f5f5f5;
+}
+
+.view-details {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a6cf7;
+  margin-right: 8px;
+}
+
+.card-footer svg {
+  color: #4a6cf7;
+}

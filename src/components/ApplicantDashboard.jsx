@@ -15,7 +15,7 @@ const ApplicantDashboard = () => {
             <Store size={20} />
             Job Market
           </NavLink>
-          <NavLink className="nav-item" to={'/applicant/jobs'}>
+          <NavLink className="nav-item" to={'/applicant/applied-jobs'}>
             <FileUser size={20} />
             Applied Jobs
           </NavLink>

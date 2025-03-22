@@ -3,19 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import JobCard from "./JobCard";
 import axios from "axios";
+import AppliedJobCard from "./AppliedJobCard";
 
-export const CompanyJobs = () => {
+export const ApplicantJobs = () => {
     const [jobs, setJobs] = useState({ activeJobs: [], inactiveJobs: [] });
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    const companyId = JSON.parse(localStorage.getItem('job-connect')).userId;
+    const applicantId = JSON.parse(localStorage.getItem('job-connect')).userId;
 
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/company/${companyId}/jobs`);
+                if (!applicantId) return
+                const response = await axios.get(`http://localhost:5000/api/applicant/${applicantId}/applied`);
                 setJobs(response?.data?.data);
                 setLoading(false);
             } catch (error) {
@@ -27,33 +29,15 @@ export const CompanyJobs = () => {
     }, []);
 
     const filterJobs = (jobs) => {
-        return jobs.filter(job =>
-            job.job_name.toLowerCase().includes(searchTerm.toLowerCase())
+        return jobs?.filter(job =>
+            job?.job_name.toLowerCase().includes(searchTerm.toLowerCase())
         );
     };
 
     return <main className="dashboard-main">
-        <div className="dashboard-header">
-            <div className="search-section">
-                <div className="search-bar">
-                    <Search size={20} />
-                    <input
-                        type="text"
-                        placeholder="Search jobs..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
-            </div>
-            <button className="create-job-btn" onClick={() => navigate('/create-job')}>
-                <PlusCircle size={20} />
-                Create New Job
-            </button>
-        </div>
-
         <section className="jobs-section">
 
-            <h2>Active Jobs</h2>
+            <h2>Applied Jobs</h2>
 
             <div className='expectation-levels-container'>
                 <div className='expected-level-container'><div className='expected-level-indicator communication-indicator-color'></div>Communication skill level</div>
@@ -66,12 +50,7 @@ export const CompanyJobs = () => {
                     <div className="loading-spinner" />
                 ) : (
                     filterJobs(jobs).map(job => (
-                        <JobCard
-                            key={job?.id}
-                            job={job}
-                            status="active"
-                            onClick={() => navigate(`/job/${job?.id}`)}
-                        />
+                        <AppliedJobCard job={job} key={job.id} />
                     ))
                 )}
             </div>
